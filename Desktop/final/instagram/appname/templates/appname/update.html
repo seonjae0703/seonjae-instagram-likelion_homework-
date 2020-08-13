@@ -1,0 +1,145 @@
+<a href="/create"> 글쓰기 </a>
+
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <!-- Facebook Meta Tags / 페이스북 오픈 그래프 -->
+    <meta property="og:url" content="http://kindtiger.dothome.co.kr/insta">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="instagram">
+    <meta property="og:description" content="instagram clone">
+    <meta property="og:image" content="http://kindtiger.dothome.co.kr/insta/imgs/instagram.jpeg">
+    .
+    <!-- Twitter Meta Tags / 트위터 -->
+    <meta name="twitter:card" content="instagram clone">
+    <meta name="twitter:title" content="instagram">
+    <meta name="twitter:description" content="instagram clone">
+    <meta name="twitter:image" content="http://kindtiger.dothome.co.kr/insta/imgs/instagram.jpeg">
+
+    <!-- Google / Search Engine Tags / 구글 검색 엔진 -->
+    <meta itemprop="name" content="instagram">
+    <meta itemprop="description" content="instagram clone">
+    <meta itemprop="image" content="http://kindtiger.dothome.co.kr/insta/imgs/instagram.jpeg">
+
+
+    <title>instagram</title>
+    <link rel="stylesheet" href="{% static 'appname/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'appname/css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'appname/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'appname/css/new_post.css' %}">
+    <link rel="shortcut icon" href="{% static 'appname/img_section/instagram.png' %}">
+
+</head>
+<body>
+
+
+<section id="container">
+
+
+    <header id="header">
+        <section class="h_inner">
+
+            <h1 class="logo">
+                <a href="{% url 'main' %}">
+                    <div class="sprite_insta_icon"></div>
+                    <div>
+                        <div class="sprite_write_logo"></div>
+                    </div>
+                </a>
+            </h1>
+
+            <div class="search_field">
+                <input type="text" placeholder="검색" tabindex="0">
+
+                <div class="fake_field">
+                    <span class=sprite_small_search_icon></span>
+                    <span>검색</span>
+                </div>
+            </div>
+
+
+            <div class="right_icons">
+                <a href="{% url 'create' %}"><div class="sprite_camera_icon"></div></a>
+                <a href="https://www.instagram.com/seonjae_style/"><div class="sprite_compass_icon"></div></a>
+                <a href="{% url 'mypage' user_id=myuser %}"><div class="sprite_user_icon_outline"></div></a>
+                <svg width="1.5em" height="1.5em" viewBox="0 0 10 10" class="bi bi-door-open-fill" fill="currentColor"  xmlns="http://www.w3.org/2000/svg">
+                    <a href="{% url 'logout' %}">
+                        <path fill-rule="evenodd" d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2v13h1V2.5a.5.5 0 0 0-.5-.5H11zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
+                    </a>
+                 </svg>
+            </div>
+        </section>
+    </header>
+
+
+
+    <div id="main_container">
+
+        <div class="post_form_container">
+            <form method="POST" enctype="multipart/form-data" class="post_form">
+                <div class="title">
+                    NEW POST
+                </div>
+      
+                <p>
+                   
+                </p>
+                <p>
+                    {% csrf_token %}
+                    <table>
+                        {{ form.as_table }}
+                    </table>
+          
+
+                </p>
+                <input class="submit_btn" type="submit" value="저장">
+            </form>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+<script src="js/insta.js"></script>
+
+<script>
+       var fileInput  = document.querySelector( "#id_photo" ),
+           button     = document.querySelector( ".input-file-trigger" ),
+           the_return = document.querySelector(".file-return");
+
+       // Show image
+       fileInput.addEventListener('change', handleImage, false);
+       var canvas = document.getElementById('imageCanvas');
+       var ctx = canvas.getContext('2d');
+
+
+        function handleImage(e){
+           var reader = new FileReader();
+           reader.onload = function(event){
+               var img = new Image();
+               // var imgWidth =
+               img.onload = function(){
+                   canvas.width = 300;
+                   canvas.height = 300;
+                   ctx.drawImage(img,0,0,300,300);
+               };
+               img.src = event.target.result;
+               // img.width = img.width*0.5
+               // canvas.height = img.height;
+           };
+           reader.readAsDataURL(e.target.files[0]);
+       }
+
+
+</script>
+</body>
+</html>

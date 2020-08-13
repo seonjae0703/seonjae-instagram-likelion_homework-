@@ -1,0 +1,264 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <!-- Facebook Meta Tags / 페이스북 오픈 그래프 -->
+    <meta property="og:url" content="http://kindtiger.dothome.co.kr/insta">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="instagram">
+    <meta property="og:description" content="instagram clone">
+    <meta property="og:image" content="http://kindtiger.dothome.co.kr/insta/imgs/instagram.jpeg">
+    .
+    <!-- Twitter Meta Tags / 트위터 -->
+    <meta name="twitter:card" content="instagram clone">
+    <meta name="twitter:title" content="instagram">
+    <meta name="twitter:description" content="instagram clone">
+    <meta name="twitter:image" content="http://kindtiger.dothome.co.kr/insta/imgs/instagram.jpeg">
+
+    <!-- Google / Search Engine Tags / 구글 검색 엔진 -->
+    <meta itemprop="name" content="instagram">
+    <meta itemprop="description" content="instagram clone">
+    <meta itemprop="image" content="http://kindtiger.dothome.co.kr/insta/imgs/instagram.jpeg">
+
+
+    <title>instagram</title>
+    <link rel="stylesheet" href="{% static 'appname/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'appname/css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'appname/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'appname/css/profile.css' %}">
+    <link rel="shortcut icon" href="{% static 'appname/img_section/instagram.png' %}">
+
+
+</head>
+<body>
+
+
+<section id="container">
+
+    <header id="header">
+        <section class="h_inner">
+
+            <h1 class="logo">
+                <a href="{% url 'main' %}">
+                    <div class="sprite_insta_icon"></div>
+                    <div>
+                        <div class="sprite_write_logo"></div>
+                    </div>
+                </a>
+            </h1>
+
+            <div class="search_field">
+                <input type="text" placeholder="검색" tabindex="0">
+
+                <div class="fake_field">
+                    <span class=sprite_small_search_icon></span>
+                    <span>검색</span>
+                </div>
+            </div>
+
+
+            <div class="right_icons">
+                <a href="{% url 'create' %}"><div class="sprite_camera_icon"></div></a>
+                <a href="https://www.instagram.com/seonjae_style/"><div class="sprite_compass_icon"></div></a>
+                <a href="{% url 'mypage' user_id=user.id %}"><div class="sprite_user_icon_outline"></div></a>
+                <svg width="1.5em" height="1.5em" viewBox="0 0 10 10" class="bi bi-door-open-fill" fill="currentColor"  xmlns="http://www.w3.org/2000/svg">
+                    <a href="{% url 'logout' %}">
+                        <path fill-rule="evenodd" d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2v13h1V2.5a.5.5 0 0 0-.5-.5H11zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
+                    </a>
+                 </svg>
+            </div>
+        </section>
+    </header>
+
+
+    <div id="main_container">
+
+        <section class="b_inner">
+
+            <div class="hori_cont">
+                <div class="profile_wrap">
+                   <div class="profile_img">
+                        <img src="{% static 'appname/img_section/anne1.jpg' %}" alt="프로필사진">
+                        <!--{% if myuser.profileimage %}
+                            <img src="/media/{{ myuser.profileimage.url }}">
+                        {% endif %}-->
+                    </div>
+                </div>
+
+                <div class="detail">
+                    <div class="top">
+                        <div class="user_name">{{ myuser.username }}</div>
+                        <a href="{% url 'logout' %}" class="logout">로그아웃</a>
+                    </div>
+
+                    <ul class="middle">
+                        <li>
+                            <span>이메일<br><br>{{ myuser.email }}</span>
+                        </li>
+                       
+                        <li>
+                            <span>이름 <br><br> {{ myuser.nickname }}</span>
+                        </li>
+                     
+                        <li>
+                            <span>핸드폰 번호 <br><br> {{ myuser.phone_number }}</span>
+                        </li>
+                      
+                        <li>
+                            <span>국적 <br><br> {{ myuser.nationality }}</span>
+                        </li>
+    
+                    </ul>
+             
+                </div>
+            </div>
+
+
+
+
+
+            <div class="contents_box">
+                
+            
+                {% for post in posts %}
+
+               
+            
+
+                <article class="contents">
+                    
+                    <header class="top">
+                        <div class="user_container">
+                            <div class="profile_img">
+                                <img src="{% static 'appname/img_section/anne1.jpg' %}" alt="프로필사진">
+                                <!--{% if user.image %}
+                                    <img src="{{ user.profileimage.url }}">
+                                {% endif %}-->
+                            </div>
+                            <div class="user_name">
+                                <div class="nick_name m_text">{{ post.writer }}</div>
+                                <div class="country s_text">{{post.place}}</div>
+                            </div>
+
+                        </div>
+
+                        <div class="sprite_more_icon" data-name="more">
+                            <ul class="toggle_box">
+                               <li><input type="submit" class="follow" value="팔로우" data-name="follow"></li>
+                                <li>수정</li>
+                                <li>삭제</li>
+                            </ul>
+                        </div>
+                    </header>
+
+                    <div class="img_section">
+                        <div class="trans_inner">
+                            <div>
+                                {% if post.image %}
+                                    <img src="{{ post.image.url }}">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bottom_icons">
+                        <div class="left_icons">
+                            <div class="heart_btn">
+                                <div class="sprite_heart_icon_outline" name="39" data-name="heartbeat"></div>
+                            </div>
+                            <div class="sprite_bubble_icon"></div>
+                            <div class="sprite_share_icon" data-name="share"></div>
+                        </div>
+                        <div class="right_icon">
+                            <div class="sprite_bookmark_outline" data-name="bookmark"></div>
+                        </div>
+                    </div>
+
+                    <div class="likes m_text">
+                        좋아요
+                        <span id="like-count-39">{{ post.likes.count }}</span>
+                        <span id="bookmark-count-39"></span>
+                        개
+                    </div>
+
+                    <div class="comment_container">
+                        <div class="comment" id="comment-list-ajax-post37">
+                            <div class="comment-detail">
+                                <div class="nick_name m_text">{{ post.writer }}</div>
+                                <div>{{post.content}}</div>
+                                <div>
+                                    {% for hashtag in post.hashtags.all %}
+                                    <a href="/hashtag/{{ hashtag.name }}">#{{ hashtag.name }}</a>
+                                  {% endfor %}
+                                </div>
+                            </div>
+
+                            <hr/>
+                            {% for comment in post.comments.all %}
+                            <div class="comment-detail">
+                                <div class="nick_name m_text">{{ comment.c_writer }}</div> 
+                                <div>{{ comment.text }}</div>
+                           </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="small_heart">
+                            <a href="{% url 'like' pk=post.pk %}">
+                                {% if user in post.likes.all %}
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                                    </svg>
+                                {% else %}
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                                </svg>
+                                {% endif %}
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="timer">1시간 전<br><br><a href="{% url 'update' pk=post.pk %}"> 수정하기 </a><a href="{% url 'delete' pk=post.pk %}"> 삭제하기 </a></div>
+
+
+                    <div class="comment_field" id="add-comment-post37">
+                        <form method="POST" action='/comment/{{ post.id }}'>
+                            {% csrf_token %}
+                            {{ comment_form.text }}
+                            <div class="upload_btn m_text"> <input type ="submit" value ="게시"> </div>
+                        </form>
+                        <!-- <div class="upload_btn m_text" data-name="comment">게시</div> -->
+                    </div>
+                </article>
+
+
+                {% endfor %}
+
+                
+
+            </div>
+
+        </section>
+
+        
+
+            
+    </div>
+
+
+</section>
+
+
+<!--<script src="js/insta.js"></script>-->
+<script src="js/profile.js"></script>
+<script>
+
+
+
+</script>
+</body>
+</html>
